@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-/* Exercise 1-3
+/* Exercise 1-4
    Modify the temperature conversion program to print a heading
    above the table.
 */
@@ -20,5 +20,25 @@ int main()
 	fahr = (9.0/5) * celsius + 32;
 	printf("%3.0f %6.1f\n", celsius, fahr);
 	celsius += step;
+	return 0;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
