@@ -18,8 +18,8 @@ int main()
 
     printf("Fahrenheit -> celsius temperature conversion\n");
     for (fahr = ceiling; fahr >= floor; fahr = fahr - step) {
-	celsius = (5.0/9) * (fahr-32);
-	printf("%3d %6.1f\n", fahr, celsius);
+        celsius = (5.0/9) * (fahr-32);
+        printf("%3d %6.1f\n", fahr, celsius);
     }
     return 0;
 }
