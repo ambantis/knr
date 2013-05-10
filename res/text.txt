@@ -1,0 +1,5 @@
+This summer, spend some quality time with your favorite technology in our 2013 summer programming contest!
+
+The Lisp community is awarding prizes for demonstrating interesting and useful programs, technologies and art using any LISP-based technology.
+
+But why lisp? Aside from writing great software faster by beating the averages "Lisp is worth learning for the profound enlightenment experience you will have when you finally get it; that experience will make you a better programmer for the rest of your days".
