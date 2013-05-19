@@ -19,7 +19,7 @@ int main()
     step = 20;
 
     fahr = lower;
-    printf("Fahrenheit -> Celsius emperature conversion\n");
+    printf("Fahrenheit -> Celsius temperature conversion\n");
     while(fahr <= upper) {
         celsius = fahr2Celsius(fahr);
         printf("%d\t%d\n", fahr, celsius);
