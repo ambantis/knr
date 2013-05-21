@@ -1,5 +1,0 @@
-this line has four trailing spaces
-this line has tabs and spaces
-the next line is empty
-and now for another line with two empty spaces.
-

@@ -1,4 +1,0 @@
-	This line has a single tab at the beginning.
-The next line has nothing.
-This line has a tab	after the word 'tab'.
-And this line has a tab at the end     .
