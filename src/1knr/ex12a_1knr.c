@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-#DEFINE IN        1  /* inside a word */
-#DEFINE OUT       0  /* outside a word */
-#DEFINE NEWLINE '\n'
-#DEFINE SPACE   ' '
+#define IN        1  /* inside a word */
+#define OUT       0  /* outside a word */
+#define NEWLINE '\n'
+#define SPACE   ' '
 
 /* Exercise 1-12
  *
@@ -21,14 +21,13 @@ int main()
     {
         if (c == SPACE) 
         {
-            putchar(NEWLINE)
+            putchar(NEWLINE);
             while ((c = getchar() != EOF && c == SPACE)) 
             {
                 ;
             }
-        } else 
-        {
-            purchar(c)
+        } else {
+            putchar(c);
         }
     }
     return 0;

@@ -25,7 +25,7 @@ int main()
     while (TRUE) {
         clear_line(line, MAXLINE);
         len = get_line(line, MAXLINE);
-        if (len = 0)
+        if (len == 0)
             break;
         else if (len > 80)
             printf("%s\n", line);
