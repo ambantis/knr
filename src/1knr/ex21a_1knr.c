@@ -29,14 +29,10 @@ int strLen(char []);
 
 int main()
 {
-int lastChar;  /* line length */
-    char line[MAX_LINE];
-    clearLine(line, MAX_LINE);
+    int lastChar;  /* line length */
+    char line[MAX_LINE] = {0};
     
-    while (TRUE) {
-        lastChar = getLine(line, MAX_LINE);
-        if (lastChar == EOF)
-            break;
+    while ((lastChar = getLine(line, MAX_LINE) != EOF)) {
         entab(line, TAB, MAX_LINE);
         printf("%s\n", line);
         clearLine(line, MAX_LINE);
@@ -85,15 +81,14 @@ int entab(char s[], int tab, int max)
     return i;
 }
 
-/* replaceTab: inserts space characters within a char array  */
+/* replaceTab: replaces space characters within a char array with a tab  */
 void replaceTab(char s[], int at, int count, int max)
 {
     int i, len, validArgs;
 
     len = strLen(s);
     validArgs = TRUE;
-
-    
+ 
     /* test for valid arguments                                         */
     for (i = at; i < at+count+1; i++)
         if (s[at] != ' ') {
@@ -103,7 +98,7 @@ void replaceTab(char s[], int at, int count, int max)
     assert(validArgs == TRUE);
     
     s[at++] = '\t';
-    for (i = at; i < len+count; i++) { /* expand s[] by count to point */
+    for (i = at; i < len+count; i++) { /* shrink s[] by count from point */
         s[i] = s[i+count];
     }
     return;
