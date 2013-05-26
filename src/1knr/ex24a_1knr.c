@@ -26,7 +26,8 @@ typedef enum {
  * Indicates whether given point in the text stream is in a state of 
  */
 typedef enum {
-    code, /**< default state */
+    code,     /**< default state */
+    include,  /**< an include statement */
     quote1,   /**< inside single-quote block */
     quote2,   /**< inside double-quote block */
     comment  /**< inside comment block */
@@ -45,6 +46,7 @@ int dec(char p[], int i);
 int inc(char p[], int i);
 bool isPair(char left, char right);
 void evalStateAt(char s[], int i);
+bool isInclude(char s[]);
 int getLine(char s[], int max);
 void clearLine(char s[], int max);
 int strLen(char s[]);
@@ -90,9 +92,15 @@ bool isParen(char ch)
     switch (ch) {
         case '(': case ')': case '[': case ']': case '{': case '}':
             return true;
+            break;
+        case '<': case '>':
+            if (state == include)
+                return true;
+            break;
         default:
-            return false;
+            break;
     }
+    return false;
 }
 
 /**
@@ -108,7 +116,7 @@ void extract(char s[], char p[], int max)
     for (i = 0; i < len; i++) {
         c = s[i];
         evalStateAt(s, i);
-        if (state == code && isParen(c))
+        if ((state == code || state == include) && isParen(c))
             add(p, c, max);
     }
 }
@@ -246,6 +254,12 @@ void evalStateAt(char s[], int i)
                 state = quote1;
             else if (iZed == '\"')
                 state = quote2;
+            else if (i == 0 && iZed == '#' && isInclude(s))
+                state = include;
+            break;
+        case include:
+            if (iZed == '\n')
+                state = code;
             break;
         case quote1:
             if ((iMinus4 == '\'' && iMinus3 == '\\' && iMinus1 == '\'') ||
@@ -263,6 +277,26 @@ void evalStateAt(char s[], int i)
         default:
             break;
     }
+}
+
+/**
+ * @brief Evalutes whether beginning of line is a valid include statement.
+ *
+ * @param s[in] Line of code
+ * @param boolean true if beginning of line matches the string "#include"
+ */
+bool isInclude(char s[])
+{
+    int i;
+    const char includeStmt[] = "#include";
+    int inclLen = 8;
+    int len = strLen(s);
+    if (len < inclLen)
+        return false;
+    for (i = 0; i < inclLen; i++)
+        if (s[i] != includeStmt[i])
+            return false;
+    return true;
 }
 
 /**
