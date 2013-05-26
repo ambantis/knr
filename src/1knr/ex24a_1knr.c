@@ -7,7 +7,7 @@
  * is hard if you do it in full generality.)
  * @date 2013/05/25
  * @version 1.0a
- */
+ * */
 
 #include <stdio.h>
 #include <assert.h>
