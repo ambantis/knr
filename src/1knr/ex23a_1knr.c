@@ -153,5 +153,3 @@ int strLen(char s[])
         i++;
     return i;
 }
-
-
