@@ -1,10 +1,9 @@
 /**
  * @file
- * K&R Exercise 5.1
- * As written, getint treats a + or - not followed by a digit as a
- * valid representation of zero. Fix it to push such a character
- * back on the input.
- * @date 2013/05/31
+ * K&R Exercise 5.2
+ * Write getfloat, the floating-point analog of getint. What type
+ * does getfloat return as its function value
+ * @date 2013/06/02
  * @version 1.0a
  */
 
@@ -20,23 +19,23 @@ typedef enum {
 } bool;
 
 
-int getInt(int *);
+int getFloat(float *);
 
 int main()
 {
-    int next;
-    int n = 0;
-    int *pn = &n;
+    float next;
+    float n = 0;
+    float *pn = &n;
     while (true) {
-        next = getInt(pn);
+        next = getFloat(pn);
         if (next == 0)
             break;
-        printf("%d\n", *pn);
+        printf("%f\n", *pn);
     }
     return 0;
 }
 
-int getInt(int *pn)
+int getFloat(float *pn)
 {
     int c, sign;
 
@@ -60,6 +59,16 @@ int getInt(int *pn)
     }
     for (*pn = 0; isdigit(c) && c != EOF; c = getc(stdin)) {
         *pn = (*pn * 10) + (c - '0');
+    }
+    if (c == '.') {
+        c = getc(stdin);
+        int decimal = 0;
+        int i;
+        for (i = 10 ; isdigit(c) && c != EOF; c = getc(stdin), i *= 10) {
+            decimal = (decimal * 10) + (c - '0'); 
+        }
+        if (decimal > 0)
+            *pn = *pn + (decimal / i);
     }
     *pn *= sign;
     if (c != EOF) {
